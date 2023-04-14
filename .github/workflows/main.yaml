@@ -110,23 +110,6 @@ jobs:
             echo "Ensure documentation is up to date $ make docs"
           fi
 
-  code-security:
-    name: Security Check
-    runs-on: ubuntu-latest
-    outputs:
-      security: ${{ steps.security.outcome }}
-    steps:
-      - name: Clone repo
-        uses: actions/checkout@v3
-      - name: Security Policy
-        id: security
-        uses: appvia/terranetes-policy-action@v1
-        with:
-          directory: "."
-          policy_ssh_key: "${{ secrets.policy_token }}"
-          policy_url: "${{ env.POLICY_SOURCE }}"
-          policy_version: "${{ env.POLICY_VERSION }}"
-
   cost-token:
     name: Check Costs Enabled
     runs-on: ubuntu-latest
@@ -220,7 +203,6 @@ jobs:
       - code-docs
       - code-format
       - code-linting
-      - code-security
       - code-validate
     steps:
       - name: Update PR
@@ -241,7 +223,6 @@ jobs:
             * ⚙️ Terraform Format:         \`${{ needs.code-format.outputs.format }}\`
             * 📖 Terraform Documentation:  \`${{ needs.code-docs.outputs.docs }}\`
             * 🔍 Terraform Linting:        \`${{ needs.code-linting.outputs.linting }}\`
-            * 🔒 Terraform Security:       \`${{ needs.code-security.outputs.security }}\`
             * 🤖 Terraform Validation:     \`${{ needs.code-validate.outputs.validate }}\``
 
             if (botComment) {
