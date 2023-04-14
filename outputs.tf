@@ -11,5 +11,5 @@ output "type" {
 }
 
 output "cloud9_users" {
-  value = module.iam_user_cloud9.*
+  value = module.iam_user_cloud9[*]
 }
