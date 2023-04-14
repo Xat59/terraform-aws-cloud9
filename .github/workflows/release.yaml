@@ -17,19 +17,28 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
+      - master
 
 jobs:
   release:
     name: Github Release
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
     steps:
-      - name: Clone repo
+      - name: Checkout
         uses: actions/checkout@v3
-      - name: Release
-        uses: softprops/action-gh-release@v1
         with:
-          generate_release_notes: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Release
+        uses: cycjimmy/semantic-release-action@v3
+        with:
+          semantic_version: 18.0.0
+          extra_plugins: |
+            @semantic-release/changelog@6.0.0
+            @semantic-release/git@10.0.0
+            conventional-changelog-conventionalcommits@4.6.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
