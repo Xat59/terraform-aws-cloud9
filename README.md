@@ -26,6 +26,7 @@
 | Name | Type |
 |------|------|
 | [aws_cloud9_environment_ec2.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloud9_environment_ec2) | resource |
+| [aws_cloud9_environment_ec2.this2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloud9_environment_ec2) | resource |
 
 ## Inputs
 

@@ -10,6 +10,18 @@ resource "aws_cloud9_environment_ec2" "this" {
   tags                        = var.tags
 }
 
+resource "aws_cloud9_environment_ec2" "this2" {
+  name                        = var.name
+  instance_type               = var.instance_type
+  automatic_stop_time_minutes = var.automatic_stop_time_minutes
+  connection_type             = var.connection_type
+  image_id                    = var.image_id
+  description                 = var.description
+  owner_arn                   = var.owner_arn
+  subnet_id                   = var.subnet_id
+  tags                        = var.tags
+}
+
 module "iam_user_cloud9" {
   for_each = toset(concat(var.cloud9_admins, var.cloud9_members, var.cloud9_users))
 
