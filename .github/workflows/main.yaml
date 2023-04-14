@@ -92,23 +92,15 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
-      - name: Install Terraform Documentation CLI
-        run: |
-          curl -sL ${{ env.RELEASE }}/${{ env.VERSION }}/terraform-docs-${{ env.VERSION }}-$(uname)-amd64.tar.gz -o cli.tar.gz
-          tar -xzf cli.tar.gz
-          chmod +x terraform-docs
-          mv terraform-docs /usr/local/bin/terraform-docs
-      - name: Generate Documentation
-        run: |
-          /usr/local/bin/terraform-docs markdown table \
-            --output-check \
-            --output-mode inject .
-      - name: Ensure Documentation
-        id: docs
-        run: |
-          if ! git status | grep -q README; then
-            echo "Ensure documentation is up to date $ make docs"
-          fi
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Render terraform docs inside the README.md and push changes back to PR branch
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
 
   cost-token:
     name: Check Costs Enabled
