@@ -32,10 +32,11 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_automatic_stop_time_minutes"></a> [automatic\_stop\_time\_minutes](#input\_automatic\_stop\_time\_minutes) | Minutes of inactivity before the instance is shut down | `string` | `null` | no |
-| <a name="input_cloud9_admins"></a> [cloud9\_admins](#input\_cloud9\_admins) | List of IAM principals that has AWSCloud9Administrator policy attached. | `list(string)` | `[]` | no |
-| <a name="input_cloud9_members"></a> [cloud9\_members](#input\_cloud9\_members) | List of IAM principals that has AWSCloud9EnvironmentMember policy attached. | `list(string)` | `[]` | no |
-| <a name="input_cloud9_users"></a> [cloud9\_users](#input\_cloud9\_users) | List of IAM principals that has AWSCloud9User policy attached. | `list(string)` | `[]` | no |
+| <a name="input_cloud9_admins"></a> [cloud9\_admins](#input\_cloud9\_admins) | List of IAM principals that has AWSCloud9Administrator policy attached. When `create_iam_users` is set to `true`, it will create IAM users. If `create_iam_users` is set to `false`, you must specify existing IAM users. | `list(string)` | `[]` | no |
+| <a name="input_cloud9_members"></a> [cloud9\_members](#input\_cloud9\_members) | List of IAM principals that has AWSCloud9EnvironmentMember policy attached. When `create_iam_users` is set to `true`, it will create IAM users. If `create_iam_users` is set to `false`, you must specify existing IAM users. | `list(string)` | `[]` | no |
+| <a name="input_cloud9_users"></a> [cloud9\_users](#input\_cloud9\_users) | List of IAM principals that has AWSCloud9User policy attached. When `create_iam_users` is set to `true`, it will create IAM users. If `create_iam_users` is set to `false`, you must specify existing IAM users. | `list(string)` | `[]` | no |
 | <a name="input_connection_type"></a> [connection\_type](#input\_connection\_type) | (Optional) The connection type used for connecting to an Amazon EC2 environment. Valid values are CONNECT\_SSH and CONNECT\_SSM | `string` | `"CONNECT_SSM"` | no |
+| <a name="input_create_iam_users"></a> [create\_iam\_users](#input\_create\_iam\_users) | Weither create the IAM users from cloud9\_admins, cloud9\_members and cloud9\_users variables. | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of the environment | `string` | n/a | yes |
 | <a name="input_iam_users_prefix"></a> [iam\_users\_prefix](#input\_iam\_users\_prefix) | Prefix string when creating cloud9 admins, members and users principals. | `string` | `""` | no |
 | <a name="input_image_id"></a> [image\_id](#input\_image\_id) | The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. | `string` | `"ubuntu-18.04-x86_64"` | no |
