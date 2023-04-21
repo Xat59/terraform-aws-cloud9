@@ -64,19 +64,19 @@ variable "tags" {
 }
 
 variable "cloud9_admins" {
-  description = "List of IAM principals that has AWSCloud9Administrator policy attached."
+  description = "List of IAM principals that has AWSCloud9Administrator policy attached. When `create_iam_users` is set to `true`, it will create IAM users. If `create_iam_users` is set to `false`, you must specify existing IAM users."
   type        = list(string)
   default     = []
 }
 
 variable "cloud9_members" {
-  description = "List of IAM principals that has AWSCloud9EnvironmentMember policy attached."
+  description = "List of IAM principals that has AWSCloud9EnvironmentMember policy attached. When `create_iam_users` is set to `true`, it will create IAM users. If `create_iam_users` is set to `false`, you must specify existing IAM users."
   type        = list(string)
   default     = []
 }
 
 variable "cloud9_users" {
-  description = "List of IAM principals that has AWSCloud9User policy attached."
+  description = "List of IAM principals that has AWSCloud9User policy attached. When `create_iam_users` is set to `true`, it will create IAM users. If `create_iam_users` is set to `false`, you must specify existing IAM users."
   type        = list(string)
   default     = []
 }
@@ -85,4 +85,10 @@ variable "iam_users_prefix" {
   description = "Prefix string when creating cloud9 admins, members and users principals."
   type        = string
   default     = ""
+}
+
+variable "create_iam_users" {
+  description = "Weither create the IAM users from cloud9_admins, cloud9_members and cloud9_users variables."
+  type        = bool
+  default     = false
 }

@@ -11,7 +11,7 @@ resource "aws_cloud9_environment_ec2" "this" {
 }
 
 module "iam_user_cloud9" {
-  for_each = toset(concat(var.cloud9_admins, var.cloud9_members, var.cloud9_users))
+  for_each = var.create_iam_users ? toset(concat(var.cloud9_admins, var.cloud9_members, var.cloud9_users)) : []
 
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
   version = "5.11.1"
